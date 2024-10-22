@@ -25,7 +25,7 @@ Một trong những cách tốt nhất để thấy được tiềm năng của 
 | -----------------------| ---------------------- |
 | Bạn giữ tiền của bạn.  | Các tổ chức tài chính giữ tiền của bạn |
 | Bạn kiểm soát tiền của mình đi đâu và chi tiêu như thế nào. | Bạn phải tin tưởng các công ty sẽ không quản lý tiền của bạn một cách sai lầm, chẳng hạn như cho những người đi vay gặp rủi ro vay.|
-| Việc chuyển tiền diễn ra trong vài phút. | Payments can take days due to manual processes. |
+| Việc chuyển tiền diễn ra trong vài phút. | Các khoản thanh toán có thể mất vài ngày do quy trình thủ công. |
 | Hoạt động giao dịch là bí danh. | Hoạt động tài chính được kết hợp chặt chẽ với danh tính của bạn. |
 | Tài chính phi tập trung không hạn chế bạn truy cập. | Bạn phải đăng ký để sử dụng các dịch vụ tài chính từ các tổ chức. |
 | Một thị trường tài chính luôn luôn mở 24/7. | Thị trường đóng cửa vì nhân viên cần nghỉ ngơi cuối ngày. |
