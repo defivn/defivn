@@ -11,6 +11,9 @@ import UL from '@/components/mdx/ul'
 import OL from '@/components/mdx/ol'
 import A from '@/components/mdx/a'
 import Table from '@/components/mdx/table'
+import TR from '@/components/mdx/tr'
+import TD from '@/components/mdx/td'
+import TH from '@/components/mdx/th'
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
 
@@ -27,6 +30,9 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     ol: OL,
     a: A,
     table: Table,
+    tr: TR,
+    td: TD,
+    th: TH,
     ...components,
   }
 }
