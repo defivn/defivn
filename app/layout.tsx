@@ -3,6 +3,8 @@ import { Source_Sans_3 } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider"
 import { Header } from "@/components/header"
+import { PostHogProvider } from "@/app/providers";
+
 const sourceSans3 = Source_Sans_3({
   subsets: ["latin"],
 });
@@ -46,19 +48,21 @@ export default function RootLayout({
       <body
         className={`${sourceSans3.className} antialiased`}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <div className="min-h-screen flex flex-col justify-between pt-0 md:pt-8 p-8">
-            <main className="max-w-xl mx-auto w-full space-y-6">
-              <Header />
-              {children}
-            </main>
-          </div>
-        </ThemeProvider>
+        <PostHogProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <div className="min-h-screen flex flex-col justify-between pt-0 md:pt-8 p-8">
+              <main className="max-w-xl mx-auto w-full space-y-6">
+                <Header />
+                {children}
+              </main>
+            </div>
+          </ThemeProvider>
+        </PostHogProvider>
       </body>
     </html>
   );
