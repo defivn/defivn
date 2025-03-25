@@ -3,10 +3,17 @@ import Link from "next/link"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
-export default function PostNav({ currentPostId }: { currentPostId: number }) {
+export default function PostNav({ currentSectionId, currentPostId }: { currentSectionId: number, currentPostId: number }) {
+  // based on the current section id, find the list of posts
+  const currentSection = posts.find((post) => post.id === currentSectionId)
+  
   // based on the current post id, find the previous and next post
-  const previousPost = currentPostId === 1 ? undefined : posts.find((post) => post.id === currentPostId - 1)
-  const nextPost = posts.find((post) => post.id === currentPostId + 1)
+  const previousPost = currentPostId === 1 ? 
+    (currentSectionId === 1 ? undefined : posts[currentSectionId - 2]?.posts[posts[currentSectionId - 2]?.posts.length - 1]) : 
+    currentSection?.posts.find((post) => post.id === currentPostId - 1)
+  const nextPost = currentPostId === currentSection?.posts.length ? 
+    (currentSectionId === posts.length ? undefined : posts[currentSectionId]?.posts[0]) : 
+    currentSection?.posts.find((post) => post.id === currentPostId + 1)
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mt-12">
@@ -22,11 +29,11 @@ export default function PostNav({ currentPostId }: { currentPostId: number }) {
         </Link>
       </Button>
       <Button variant="outline" asChild className="h-[96px]">
-        <Link href={nextPost?.url || ""}>
+        <Link href={nextPost?.url || "/"}>
           <div className="flex flex-row justify-between items-center gap-2 w-full text-left">
             <div className="flex flex-col gap-2">
               <p className="text-sm">Tiếp</p>
-              <p className="text-md font-bold">{nextPost?.title}</p>
+              <p className="text-md font-bold">{nextPost ? nextPost.title : "Trang chủ"}</p>
             </div>
             <ChevronRight className="w-4 h-4" />
           </div>
