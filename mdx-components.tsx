@@ -14,7 +14,7 @@ import Table from '@/components/mdx/table'
 import TR from '@/components/mdx/tr'
 import TD from '@/components/mdx/td'
 import TH from '@/components/mdx/th'
-
+import CodeBlock from '@/components/mdx/code'
 export function useMDXComponents(components: MDXComponents): MDXComponents {
 
   return {
@@ -33,6 +33,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     tr: TR,
     td: TD,
     th: TH,
+    code: CodeBlock,
     ...components,
   }
 }

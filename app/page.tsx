@@ -16,7 +16,7 @@ export default function Home() {
           posts.find((post) => post.section === "Định nghĩa")?.posts.map((post) => (
             <div key={post.id} className="flex flex-row items-center gap-2">
               <h3 className="text-sm font-semibold bg-muted p-2 rounded-full w-8 h-8 flex items-center justify-center">{post.id}</h3>
-              <Link className="underline underline-offset-4 text-blue-500 dark:text-blue-400" href={post.url}>
+              <Link className="font-medium underline underline-offset-4 text-blue-500 dark:text-blue-400 w-fit" href={post.url}>
                 {post.title}
               </Link>
             </div>
@@ -29,7 +29,7 @@ export default function Home() {
           posts.find((post) => post.section === "Các hệ sinh thái")?.posts.map((post) => (
             <div key={post.id} className="flex flex-row items-center gap-2">
               <h3 className="text-sm font-semibold bg-muted p-2 rounded-full w-8 h-8 flex items-center justify-center">{post.id}</h3>
-              <Link className="underline underline-offset-4 text-blue-500 dark:text-blue-400" href={post.url}>
+              <Link className="font-medium underline underline-offset-4 text-blue-500 dark:text-blue-400 w-fit" href={post.url}>
                 {post.title}
               </Link>
             </div>
@@ -42,7 +42,7 @@ export default function Home() {
           posts.find((post) => post.section === "Ứng dụng")?.posts.map((post) => (
             <div key={post.id} className="flex flex-row items-center gap-2">
               <h3 className="text-sm font-semibold bg-muted p-2 rounded-full w-8 h-8 flex items-center justify-center">{post.id}</h3>
-              <Link className="underline underline-offset-4 text-blue-500 dark:text-blue-400" href={post.url}>
+              <Link className="font-medium underline underline-offset-4 text-blue-500 dark:text-blue-400 w-fit" href={post.url}>
                 {post.title}
               </Link>
             </div>
