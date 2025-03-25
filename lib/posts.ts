@@ -34,5 +34,92 @@ export const posts = [
         url: "/tai-lieu/canh-tac-lai-suat"
       },
     ]
+  },
+  {
+    id: 2,
+    section: "Các hệ sinh thái",
+    posts: [
+      {
+        id: 1,
+        title: "Ethereum",
+        url: "/tai-lieu/ethereum"
+      },
+      {
+        id: 2,
+        title: "Solana",
+        url: "/tai-lieu/solana"
+      },
+      {
+        id: 3,
+        title: "Polkadot",
+        url: "/tai-lieu/polkadot"
+      },
+    ]
+  },
+  {
+    id: 3,
+    section: "Ứng dụng",
+    posts: [
+      {
+        id: 1,
+        title: "Lido",
+        url: "/tai-lieu/lido"
+      },
+      {
+        id: 2,
+        title: "Sanctum",
+        url: "/tai-lieu/sanctum"
+      },
+      {
+        id: 3,
+        title: "Bifrost",
+        url: "/tai-lieu/bifrost"
+      },
+      {
+        id: 4,
+        title: "Uniswap",
+        url: "/tai-lieu/uniswap"
+      },
+      {
+        id: 5,
+        title: "KyberSwap",
+        url: "/tai-lieu/kyberswap"
+      },
+      {
+        id: 6,
+        title: "Jupiter",
+        url: "/tai-lieu/jupiter"
+      },
+      {
+        id: 7,
+        title: "Hydration",
+        url: "/tai-lieu/hydration"
+      },
+      {
+        id: 8,
+        title: "Aave",
+        url: "/tai-lieu/aave"
+      },
+      {
+        id: 9,
+        title: "Kamino",
+        url: "/tai-lieu/kamino"
+      },
+      {
+        id: 10,
+        title: "Pendle",
+        url: "/tai-lieu/pendle"
+      },
+      {
+        id: 11,
+        title: "GMX",
+        url: "/tai-lieu/gmx"
+      },
+      {
+        id: 12,
+        title: "Drift",
+        url: "/tai-lieu/drift"
+      }
+    ]
   }
 ]

@@ -24,7 +24,31 @@ export default function Home() {
         }
       </div>
       <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0">Các hệ sinh thái</h2>
+      <div className="flex flex-col gap-2">
+        {
+          posts.find((post) => post.section === "Các hệ sinh thái")?.posts.map((post) => (
+            <div key={post.id} className="flex flex-row items-center gap-2">
+              <h3 className="text-sm font-semibold bg-muted p-2 rounded-full w-8 h-8 flex items-center justify-center">{post.id}</h3>
+              <Link className="underline underline-offset-4 text-blue-500 dark:text-blue-400" href={post.url}>
+                {post.title}
+              </Link>
+            </div>
+          ))
+        }
+      </div>
       <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0">Ứng dụng</h2>
+      <div className="flex flex-col gap-2">
+        {
+          posts.find((post) => post.section === "Ứng dụng")?.posts.map((post) => (
+            <div key={post.id} className="flex flex-row items-center gap-2">
+              <h3 className="text-sm font-semibold bg-muted p-2 rounded-full w-8 h-8 flex items-center justify-center">{post.id}</h3>
+              <Link className="underline underline-offset-4 text-blue-500 dark:text-blue-400" href={post.url}>
+                {post.title}
+              </Link>
+            </div>
+          ))
+        }
+      </div>
     </div>
   );
 }

@@ -6,7 +6,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider"
 import { Header } from "@/components/header"
 import { PostHogProvider } from "@/app/providers";
-
+import Footer from "@/components/footer";
 // const sourceSans3 = Source_Sans_3({
 //   subsets: ["latin"],
 // });
@@ -66,6 +66,7 @@ export default function RootLayout({
               <main className="max-w-xl mx-auto w-full space-y-6">
                 <Header />
                 {children}
+                <Footer />
               </main>
             </div>
           </ThemeProvider>
