@@ -53,7 +53,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <div className="min-h-screen flex flex-col justify-between pt-0 md:pt-8 p-8">
-            <main className="max-w-[60ch] mx-auto w-full space-y-6">
+            <main className="max-w-xl mx-auto w-full space-y-6">
               <Header />
               {children}
             </main>
