@@ -1,7 +1,7 @@
 export default function AI() {
   return (
     <div>
-      AI
+      AI đang trong quá trình xây dựng
     </div>
   )
 }
