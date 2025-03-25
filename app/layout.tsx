@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Source_Sans_3 } from "next/font/google";
 import "./globals.css";
-
+import { ThemeProvider } from "@/components/theme-provider"
+import { Header } from "@/components/header"
 const sourceSans3 = Source_Sans_3({
   subsets: ["latin"],
 });
@@ -41,15 +42,23 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="vi">
+    <html lang="vi" suppressHydrationWarning>
       <body
         className={`${sourceSans3.className} antialiased`}
       >
-        <div className="min-h-screen flex flex-col justify-between pt-0 md:pt-8 p-8">
-          <main className="max-w-[60ch] mx-auto w-full space-y-6">
-            {children}
-          </main>
-        </div>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <div className="min-h-screen flex flex-col justify-between pt-0 md:pt-8 p-8">
+            <main className="max-w-[60ch] mx-auto w-full space-y-6">
+              <Header />
+              {children}
+            </main>
+          </div>
+        </ThemeProvider>
       </body>
     </html>
   );
