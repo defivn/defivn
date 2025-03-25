@@ -10,7 +10,7 @@ export function Header() {
           className="dark:invert"
           src="/hero.svg"
           alt="DeFi.vn hero"
-          width={180}
+          width={150}
           height={38}
           priority
         />

@@ -15,7 +15,6 @@ import { AIButton } from "@/components/ai-button";
 
 const fontVietnamese = Inter({
   subsets: ["latin"],
-  weight: ["400"],
 });
 
 export const metadata: Metadata = {
