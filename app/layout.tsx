@@ -1,12 +1,19 @@
 import type { Metadata } from "next";
-import { Source_Sans_3 } from "next/font/google";
+// import { Source_Sans_3 } from "next/font/google";
+
+import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider"
 import { Header } from "@/components/header"
 import { PostHogProvider } from "@/app/providers";
 
-const sourceSans3 = Source_Sans_3({
+// const sourceSans3 = Source_Sans_3({
+//   subsets: ["latin"],
+// });
+
+const fontVietnamese = Inter({
   subsets: ["latin"],
+  weight: ["400"],
 });
 
 export const metadata: Metadata = {
@@ -46,7 +53,7 @@ export default function RootLayout({
   return (
     <html lang="vi" suppressHydrationWarning>
       <body
-        className={`${sourceSans3.className} antialiased`}
+        className={`${fontVietnamese.className} antialiased`}
       >
         <PostHogProvider>
           <ThemeProvider
@@ -55,7 +62,7 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <div className="min-h-screen flex flex-col justify-between pt-0 md:pt-8 p-8">
+            <div className="min-h-screen flex flex-col justify-between p-2 md:p-8 mb-12">
               <main className="max-w-xl mx-auto w-full space-y-6">
                 <Header />
                 {children}
