@@ -12,14 +12,16 @@ Blockchain (phiên dịch tiếng Việt **Công Nghệ Chuỗi Khối**) là c�
 
 Mọi máy tính trong mạng phải đồng ý với từng khối mới và toàn bộ chuỗi. Những máy tính này được gọi là **"Node" ("Nút")**. Các nút đảm bảo mọi người tương tác với blockchain đều có cùng một dữ liệu. Để thực hiện thỏa thuận phân tán này, blockchain cần có cơ chế đồng thuận.
 
-### Hash (Băm)
-Hash là một hàm toán học được sử dụng để tạo ra một giá trị duy nhất từ dữ liệu đầu vào. Trong blockchain, hash được sử dụng để tạo ra một giá trị duy nhất cho mỗi khối.
+## Diễn giải tương tác về Blockchain
 
-Hash được sử dụng để xác thực tính toàn vẹn của dữ liệu trong blockchain. Khi một khối được tạo ra, nó sẽ được băm và một hash duy nhất sẽ được tạo ra. Hash này sẽ được thêm vào khối và sẽ được sử dụng để xác thực tính toàn vẹn của khối đó.
+Dưới đây là 1 phần diễn giải về cơ chế vận hành của blockchain mà bạn có thể thử để hiểu rõ hơn. Phần này lấy cảm hứng từ [Anders Brownworth's Blockchain Demo](https://andersbrownworth.com/blockchain/) và được viết lại bởi [@zxstim](https://github.com/zxstim).
 
-Hash cũng được sử dụng để tạo ra một khối mới từ khối trước đó. Khi một khối mới được tạo ra, nó sẽ được băm và một hash duy nhất sẽ được tạo ra. Hash này sẽ được thêm vào khối và sẽ được sử dụng để xác thực tính toàn vẹn của khối đó.
+### Hash (Hàm băm)
+**Hash (hay còn gọi là hàm băm)** là một hàm toán học được sử dụng để tạo ra một giá trị duy nhất từ dữ liệu đầu vào. Trong blockchain, hash được sử dụng để tạo ra một giá trị duy nhất cho mỗi khối.
 
-Bạn nhập thử dữ liệu vào bên dưới để xem hash của nó là gì:
+**Hash** được sử dụng để xác thực tính toàn vẹn của dữ liệu trong blockchain. Khi một khối được tạo ra, nó sẽ được băm và một hash duy nhất sẽ được tạo ra. Hash này sẽ được thêm vào khối và sẽ được sử dụng để xác thực tính toàn vẹn của khối đó.
+
+Bạn nhập thử dữ liệu vào bên dưới để xem **hash (giá trị băm)** của nó là gì
 
 <HashDemo />
 
