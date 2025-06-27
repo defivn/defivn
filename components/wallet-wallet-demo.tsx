@@ -251,6 +251,9 @@ export default function WalletDemo() {
               <p className="text-lg text-muted-foreground self-end">ETH</p>
             </div>
           </div>
+          <p>
+            Nhấn gửi khi bạn đã sẵn sàng và theo dõi trạng thái giao dịch.
+          </p>
           <form.Subscribe
             selector={(state) => [state.canSubmit, state.isSubmitting]}
           >
