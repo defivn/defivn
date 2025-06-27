@@ -5,7 +5,7 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useState, useEffect } from "react";
-import { Loader2, Check } from "lucide-react";
+import { Loader2, Check, CircleDashed } from "lucide-react";
 import {
   generatePrivateKey,
   generateMnemonic,
@@ -28,6 +28,7 @@ export default function WalletDemo() {
   const [sendIsConfirming, setSendIsConfirming] = useState(false);
   const [sendIsSuccess, setSendIsSuccess] = useState(false);
   const [receiverBalance, setReceiverBalance] = useState("");
+  const [currentStage, setCurrentStage] = useState(0);
 
   const GAS_FEE = "0.00001"
 
@@ -37,18 +38,37 @@ export default function WalletDemo() {
     },
     onSubmit: async ({ value }) => {
       setSendIsConfirming(true);
+      setCurrentStage(1);
+      
+      // Stage 1: Signing transaction (0.5s)
+      setTimeout(() => setCurrentStage(2), 1000);
+      
+      // Stage 2: Sending to node (1s)
+      setTimeout(() => setCurrentStage(3), 2000);
+      
+      // Stage 3: Creating block (1.5s)
+      setTimeout(() => setCurrentStage(4), 3000);
+      
+      // Stage 4: Adding to chain (2s)
+      setTimeout(() => setCurrentStage(5), 4000);
+      
+      // Stage 5: Confirming (2.5s) - Update balances here
       setTimeout(() => {
+        setCurrentStage(6);
         setSendIsConfirming(false);
         setSendIsSuccess(true);
-      }, 1000);
+        // Update balances after all stages complete
+        setReceiverBalance(
+          String(Number(receiverBalance) + Number(value.sendAmount))
+        );
+        setBalance(String(Number(balance) - Number(value.sendAmount) - Number(GAS_FEE)));
+      }, 5000);
+      
       setTimeout(() => {
         setSendIsSuccess(false);
-      }, 2000);
+      }, 7000);
+      
       form.reset();
-      setReceiverBalance(
-        String(Number(receiverBalance) + Number(value.sendAmount))
-      );
-      setBalance(String(Number(balance) - Number(value.sendAmount) - Number(GAS_FEE)));
     },
   });
 
@@ -64,6 +84,7 @@ export default function WalletDemo() {
     setBalance("");
     setAddress("");
     setReceiverBalance("");
+    setCurrentStage(0);
     form.reset();
   }
 
@@ -133,7 +154,7 @@ export default function WalletDemo() {
         <Button
           className="w-fit self-end hover:cursor-pointer ml-4"
           onClick={() => {
-            setBalance(String(Number(balance) + 1));
+            setBalance(String(Number(balance) + 10));
           }}
         >
           Nạp ETH
@@ -214,7 +235,7 @@ export default function WalletDemo() {
             </form.Field>
           </div>
           <p>
-            Để gửi giao dịch, bạn phải trả cho mạng lưới Blockchain một khoản
+            Để gửi giao dịch, bạn phải trả cho mạng lưới Ethereum một khoản
             phí gọi là phí gas. Phí gas được tính bằng ETH. Phí gas giao động
             thường xuyên tuỳ thuộc vào tình trạng mạng lưới hiện tại.
           </p>
@@ -236,7 +257,7 @@ export default function WalletDemo() {
             {([canSubmit, isSubmitting]) => (
               <Button
                 size="lg"
-                className="hover:cursor-pointer font-bold self-end w-[150px]"
+                className="hover:cursor-pointer font-bold self-end w-full"
                 type="submit"
                 disabled={!canSubmit || isSubmitting || sendIsConfirming}
               >
@@ -259,6 +280,58 @@ export default function WalletDemo() {
         </div>
       </form>
       <div className="flex flex-col gap-2">
+        <div className={`flex flex-row gap-2 items-center`}>
+          {currentStage === 1 ? (
+            <Loader2 className="w-4 h-4 animate-spin" />
+          ) : currentStage > 1 ? (
+            <Check className="w-4 h-4" />
+          ) : (
+            <CircleDashed className="w-4 h-4" />
+          )}
+          <p>Dùng private key để tạo ra chữ ký cho giao dịch</p>
+        </div>
+        <div className={`flex flex-row gap-2 items-center`}>
+          {currentStage === 2 ? (
+            <Loader2 className="w-4 h-4 animate-spin" />
+          ) : currentStage > 2 ? (
+            <Check className="w-4 h-4" />
+          ) : (
+            <CircleDashed className="w-4 h-4" />
+          )}
+          <p>Gửi giao dịch đến Node (Nút) của mạng lưới Ethereum</p>
+        </div>
+        <div className={`flex flex-row gap-2 items-center`}>
+          {currentStage === 3 ? (
+            <Loader2 className="w-4 h-4 animate-spin" />
+          ) : currentStage > 3 ? (
+            <Check className="w-4 h-4" />
+          ) : (
+            <CircleDashed className="w-4 h-4" />
+          )}
+          <p>Khối các giao dịch được khởi tạo</p>
+        </div>
+        <div className={`flex flex-row gap-2 items-center`}>
+          {currentStage === 4 ? (
+            <Loader2 className="w-4 h-4 animate-spin" />
+          ) : currentStage > 4 ? (
+            <Check className="w-4 h-4" />
+          ) : (
+            <CircleDashed className="w-4 h-4" />
+          )}
+          <p>Khối các giao dịch được thêm vào chuỗi</p>
+        </div>
+        <div className={`flex flex-row gap-2 items-center`}>
+          {currentStage === 5 ? (
+            <Loader2 className="w-4 h-4 animate-spin" />
+          ) : currentStage > 5 ? (
+            <Check className="w-4 h-4" />
+          ) : (
+            <CircleDashed className="w-4 h-4" />
+          )}
+          <p>Khối vừa thêm vào được xác nhận bởi mạng lưới Ethereum</p>
+        </div>
+      </div>
+      <div className="flex flex-col gap-2">
         <h2 className="text-lg text-muted-foreground">Số dư ví người nhận</h2>
         <div className="flex flex-row gap-2">
           <input
@@ -271,6 +344,9 @@ export default function WalletDemo() {
           <p className="text-lg text-muted-foreground self-end">ETH</p>
         </div>
       </div>
+      <Button className="w-fit self-end hover:cursor-pointer" onClick={handleResetDemo}>
+        Thử lại
+      </Button>
     </div>
   );
 }
