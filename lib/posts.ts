@@ -33,6 +33,11 @@ export const posts = [
         title: "Canh tác lãi suất",
         url: "/tai-lieu/canh-tac-lai-suat"
       },
+      {
+        id: 7,
+        title: "Tài khoản ví",
+        url: "/tai-lieu/tai-khoan-vi"
+      }
     ]
   },
   {
