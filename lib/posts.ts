@@ -37,6 +37,11 @@ export const posts = [
         id: 7,
         title: "Tài khoản ví",
         url: "/tai-lieu/tai-khoan-vi"
+      },
+      {
+        id: 8,
+        title: "Từ điển",
+        url: "/tai-lieu/tu-dien"
       }
     ]
   },
