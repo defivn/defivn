@@ -3,11 +3,11 @@ import type { Metadata } from "next";
 
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider } from "@/components/theme-provider"
-import { Header } from "@/components/header"
-import { PostHogProvider } from "@/app/providers";
+import { ThemeProvider } from "@/components/theme-provider";
+import { Header } from "@/components/header";
 import Footer from "@/components/footer";
 import { AIButton } from "@/components/ai-button";
+import Providers from "@/providers";
 
 // const sourceSans3 = Source_Sans_3({
 //   subsets: ["latin"],
@@ -18,33 +18,33 @@ const fontVietnamese = Inter({
 });
 
 export const metadata: Metadata = {
-  title: 'DeFi.vn',
-  description: 'Bách khoa toàn thư về tài chính phi tập trung',
-  metadataBase: new URL('https://www.defi.vn'),
+  title: "DeFi.vn",
+  description: "Bách khoa toàn thư về tài chính phi tập trung",
+  metadataBase: new URL("https://www.defi.vn"),
   openGraph: {
-    title: 'DeFi.vn',
-    description: 'Bách khoa toàn thư về tài chính phi tập trung',
-    url: 'https://www.defi.vn',
-    siteName: 'DeFi.vn',
+    title: "DeFi.vn",
+    description: "Bách khoa toàn thư về tài chính phi tập trung",
+    url: "https://www.defi.vn",
+    siteName: "DeFi.vn",
     images: [
       {
-        url: '/defi-vn-tbn.png',
+        url: "/defi-vn-tbn.png",
         width: 1200,
         height: 630,
-        alt: 'og-image',
+        alt: "og-image",
       },
     ],
-    locale: 'vi_VN',
-    type: 'website',
+    locale: "vi_VN",
+    type: "website",
   },
   twitter: {
-    card: 'summary_large_image',
-    title: 'DeFi.vn',
-    description: 'Bách khoa toàn thư về tài chính phi tập trung',
-    creator: '@zxstim',
-    images: ['/defi-vn-tbn.png'],
+    card: "summary_large_image",
+    title: "DeFi.vn",
+    description: "Bách khoa toàn thư về tài chính phi tập trung",
+    creator: "@zxstim",
+    images: ["/defi-vn-tbn.png"],
   },
-}
+};
 
 export default function RootLayout({
   children,
@@ -53,10 +53,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="vi" suppressHydrationWarning>
-      <body
-        className={`${fontVietnamese.className} antialiased`}
-      >
-        <PostHogProvider>
+      <body className={`${fontVietnamese.className} antialiased`}>
+        <Providers>
           <ThemeProvider
             attribute="class"
             defaultTheme="system"
@@ -64,7 +62,7 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             <div className="min-h-screen flex flex-col justify-between p-2 md:p-8 mb-12">
-              <main className="max-w-xl mx-auto w-full space-y-6">
+              <main className="max-w-2xl mx-auto w-full space-y-6">
                 <Header />
                 {children}
                 <AIButton />
@@ -72,7 +70,7 @@ export default function RootLayout({
               </main>
             </div>
           </ThemeProvider>
-        </PostHogProvider>
+        </Providers>
       </body>
     </html>
   );
