@@ -5,7 +5,14 @@ import Image from "next/image";
 import { useForm } from "@tanstack/react-form";
 import type { AnyFieldApi } from "@tanstack/react-form";
 import { DEFIVN_WALLET_ADDRESS } from "@/lib/constants";
-import { ArrowRightLeft, ArrowUpDown, CircleSlash } from "lucide-react";
+import {
+  ArrowRightLeft,
+  ArrowUpDown,
+  Check,
+  CircleSlash,
+  Loader2,
+  CircleDashed,
+} from "lucide-react";
 import { useMediaQuery } from "@/hooks/use-media-query";
 import { Button } from "@/components/ui/button";
 import { formatUnits, parseUnits } from "viem";
@@ -14,11 +21,14 @@ import useDebounce from "@/hooks/use-debounce";
 export default function SwapDemo() {
   const isDesktop = useMediaQuery("(min-width: 768px)");
   const [balances, setBalances] = useState({
-    eth: formatUnits(BigInt(100000000000000000000), 18),
-    usdt: formatUnits(BigInt(0), 6),
+    eth: formatUnits(parseUnits("100", 18), 18),
+    usdt: formatUnits(BigInt(0), 18),
   });
+  const [swapIsConfirming, setSwapIsConfirming] = useState(false);
+  const [swapIsSuccess, setSwapIsSuccess] = useState(false);
+  const [currentStage, setCurrentStage] = useState(0);
   const [buyAmount, setBuyAmount] = useState("");
-  
+
   const EXCHANGE_RATE = 2500;
 
   const form = useForm({
@@ -26,16 +36,67 @@ export default function SwapDemo() {
       sellAmount: "",
     },
     onSubmit: async ({ value }) => {
-      console.log(value);
+      setSwapIsConfirming(true);
+      setCurrentStage(1);
+
+      // Stage 1: Signing transaction (0.5s)
+      setTimeout(() => setCurrentStage(2), 1000);
+
+      // Stage 2: Sending to node (1s)
+      setTimeout(() => setCurrentStage(3), 2000);
+
+      // Stage 3: Creating block (1.5s)
+      setTimeout(() => setCurrentStage(4), 3000);
+
+      // Stage 4: Adding to chain (2s)
+      setTimeout(() => setCurrentStage(5), 4000);
+
+      // Stage 5: Confirming (2.5s) - Update balances here
+      setTimeout(() => {
+        setCurrentStage(6);
+        setSwapIsConfirming(false);
+        setSwapIsSuccess(true);
+        // Update balances after all stages complete
+        setBalances({
+          eth: formatUnits(
+            parseUnits("100", 18) - parseUnits(value.sellAmount, 18),
+            18
+          ),
+          usdt: formatUnits(
+            parseUnits(value.sellAmount, 18) * BigInt(EXCHANGE_RATE),
+            18
+          ),
+        });
+      }, 5000);
+
+      setTimeout(() => {
+        setSwapIsSuccess(false);
+      }, 7000);
+
+      form.reset();
     },
   });
 
-  const debouncedSellAmount = useDebounce(form.state.values.sellAmount, 500);
+  const [sellAmount, setSellAmount] = useState("");
+  const { value: debouncedSellAmount, isLoading } = useDebounce(
+    sellAmount,
+    500
+  );
 
   useEffect(() => {
-    const sellAmount = parseUnits(debouncedSellAmount, 18);
-    const buyAmount = sellAmount * BigInt(EXCHANGE_RATE);
-    setBuyAmount(formatUnits(buyAmount, 6));
+    if (!debouncedSellAmount) {
+      setBuyAmount("");
+      return;
+    }
+
+    try {
+      const sellAmount = parseUnits(debouncedSellAmount, 18);
+      const buyAmount = sellAmount * BigInt(EXCHANGE_RATE);
+      setBuyAmount(formatUnits(buyAmount, 18));
+    } catch {
+      // Handle invalid input
+      setBuyAmount("");
+    }
   }, [debouncedSellAmount]);
 
   return (
@@ -53,7 +114,7 @@ export default function SwapDemo() {
           />
           <p>defivn.eth</p>
         </div>
-        <div className="flex flex-col gap-2 w-[200px]">
+        <div className="flex flex-col gap-2 max-w-[300px]">
           <div className="flex flex-row gap-2 justify-between items-center">
             <div className="flex flex-row gap-2">
               <Image
@@ -125,8 +186,12 @@ export default function SwapDemo() {
                       <input
                         id={field.name}
                         name={field.name}
-                        value={field.state.value || ""}
-                        onChange={(e) => field.handleChange(e.target.value)}
+                        value={sellAmount}
+                        onChange={(e) => {
+                          const value = e.target.value;
+                          setSellAmount(value);
+                          field.handleChange(value);
+                        }}
                         type="number"
                         placeholder="0"
                         className="bg-transparent text-4xl outline-none w-full [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
@@ -135,8 +200,12 @@ export default function SwapDemo() {
                       <input
                         id={field.name}
                         name={field.name}
-                        value={field.state.value || ""}
-                        onChange={(e) => field.handleChange(e.target.value)}
+                        value={sellAmount}
+                        onChange={(e) => {
+                          const value = e.target.value;
+                          setSellAmount(value);
+                          field.handleChange(value);
+                        }}
                         type="number"
                         inputMode="decimal"
                         pattern="[0-9]*"
@@ -167,15 +236,19 @@ export default function SwapDemo() {
           <div className="flex flex-col gap-2">
             <h2>Bạn nhận</h2>
             <div className="flex flex-row gap-2 justify-between">
-              <input
-                id="buyAmount"
-                name="buyAmount"
-                value={buyAmount}
-                type="text"
-                placeholder="0"
-                className="bg-transparent text-4xl outline-none w-full [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-                readOnly
-              />
+              {isLoading ? (
+                <Loader2 className="w-10 h-10 animate-spin" />
+              ) : (
+                <input
+                  id="buyAmount"
+                  name="buyAmount"
+                  value={buyAmount}
+                  type="text"
+                  placeholder="0"
+                  className="bg-transparent text-4xl outline-none w-full [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                  readOnly
+                />
+              )}
               <p className="text-lg text-muted-foreground self-end">USDT</p>
             </div>
           </div>
@@ -190,30 +263,80 @@ export default function SwapDemo() {
             selector={(state) => [state.canSubmit, state.isSubmitting]}
           >
             {([canSubmit, isSubmitting]) => (
-              <div className="flex flex-row gap-2 justify-between">
-                <div className="flex flex-row gap-2">
-                  <Button
-                    size="icon"
-                    variant="secondary"
-                    className="hover:cursor-pointer"
-                  >
-                    <ArrowUpDown className="w-4 h-4" />
-                  </Button>
-                  <Button
-                    size="icon"
-                    variant="secondary"
-                    className="hover:cursor-pointer"
-                  >
-                    <ArrowUpDown className="w-4 h-4" />
-                  </Button>
-                </div>
-                <Button className="hover:cursor-pointer">
-                  <ArrowRightLeft className="w-4 h-4" />
-                  Trao đổi
-                </Button>
-              </div>
+              <Button
+                size="lg"
+                className="hover:cursor-pointer font-bold self-end w-full"
+                type="submit"
+                disabled={!canSubmit || isSubmitting || swapIsConfirming}
+              >
+                {swapIsConfirming ? (
+                  <>
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                    Đang trao đổi...
+                  </>
+                ) : swapIsSuccess ? (
+                  <>
+                    <Check className="w-4 h-4" />
+                    Trao đổi thành công!
+                  </>
+                ) : (
+                  <>Trao đổi</>
+                )}
+              </Button>
             )}
           </form.Subscribe>
+          <div className="flex flex-col gap-2">
+            <div className={`flex flex-row gap-2 items-center`}>
+              {currentStage === 1 ? (
+                <Loader2 className="w-4 h-4 animate-spin" />
+              ) : currentStage > 1 ? (
+                <Check className="w-4 h-4" />
+              ) : (
+                <CircleDashed className="w-4 h-4" />
+              )}
+              <p>Dùng private key để tạo ra chữ ký cho giao dịch</p>
+            </div>
+            <div className={`flex flex-row gap-2 items-center`}>
+              {currentStage === 2 ? (
+                <Loader2 className="w-4 h-4 animate-spin" />
+              ) : currentStage > 2 ? (
+                <Check className="w-4 h-4" />
+              ) : (
+                <CircleDashed className="w-4 h-4" />
+              )}
+              <p>Gửi giao dịch đến Node (Nút) của mạng lưới Ethereum</p>
+            </div>
+            <div className={`flex flex-row gap-2 items-center`}>
+              {currentStage === 3 ? (
+                <Loader2 className="w-4 h-4 animate-spin" />
+              ) : currentStage > 3 ? (
+                <Check className="w-4 h-4" />
+              ) : (
+                <CircleDashed className="w-4 h-4" />
+              )}
+              <p>Khối các giao dịch được khởi tạo</p>
+            </div>
+            <div className={`flex flex-row gap-2 items-center`}>
+              {currentStage === 4 ? (
+                <Loader2 className="w-4 h-4 animate-spin" />
+              ) : currentStage > 4 ? (
+                <Check className="w-4 h-4" />
+              ) : (
+                <CircleDashed className="w-4 h-4" />
+              )}
+              <p>Khối các giao dịch được thêm vào chuỗi</p>
+            </div>
+            <div className={`flex flex-row gap-2 items-center`}>
+              {currentStage === 5 ? (
+                <Loader2 className="w-4 h-4 animate-spin" />
+              ) : currentStage > 5 ? (
+                <Check className="w-4 h-4" />
+              ) : (
+                <CircleDashed className="w-4 h-4" />
+              )}
+              <p>Khối vừa thêm vào được xác nhận bởi mạng lưới Ethereum</p>
+            </div>
+          </div>
         </div>
       </form>
     </div>
