@@ -40,6 +40,11 @@ export const posts = [
       },
       {
         id: 8,
+        title: "Trao đổi tài sản",
+        url: "/tai-lieu/trao-doi-tai-san"
+      },
+      {
+        id: 9,
         title: "Từ điển",
         url: "/tai-lieu/tu-dien"
       }

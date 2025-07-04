@@ -72,12 +72,12 @@ export default function Footer() {
       <p className="text-sm text-center text-muted-foreground mt-2">
         Một dự án cộng đồng từ{" "}
         <a
-          href="https://ethstation.org"
+          href="https://zxstim.com"
           target="_blank"
           rel="noopener noreferrer"
           className="inline-block underline underline-offset-4 text-blue-500 dark:text-blue-400"
         >
-          Eth Station
+          ZxStim
           <ExternalLink className="w-4 h-4 inline-block ml-1 mr-2" />
         </a>
       </p>

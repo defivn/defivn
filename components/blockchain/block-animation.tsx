@@ -7,8 +7,8 @@ import {
   generateTransactionFee,
   generateTransactionId,
 } from "@/lib/blockchain/transactions";
-import CircularCountdown from "./circular-countdown";
-import { Card } from "../ui/card";
+import CircularCountdown from "@/components/blockchain/circular-countdown";
+import { Card } from "@/components/ui/card";
 import { CircleCheck } from "lucide-react";
 
 // Custom hook for intersection observer
