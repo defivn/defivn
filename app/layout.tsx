@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 // import { Source_Sans_3 } from "next/font/google";
+// import { Inter } from "next/font/google";
+import { Be_Vietnam_Pro } from "next/font/google";
 
-import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Header } from "@/components/header";
@@ -13,8 +14,13 @@ import Providers from "@/providers";
 //   subsets: ["latin"],
 // });
 
-const fontVietnamese = Inter({
+// const fontVietnamese = Inter({
+//   subsets: ["latin"],
+// });
+
+const fontVietnamese = Be_Vietnam_Pro({
   subsets: ["latin"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
 });
 
 export const metadata: Metadata = {

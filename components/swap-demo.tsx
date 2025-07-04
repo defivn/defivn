@@ -8,12 +8,13 @@ import { DEFIVN_WALLET_ADDRESS } from "@/lib/constants";
 import { ArrowRightLeft, ArrowUpDown } from 'lucide-react';
 import { useMediaQuery } from "@/hooks/use-media-query";
 import { Button } from "@/components/ui/button";
+import { formatUnits } from "viem";
 
 export default function SwapDemo() {
   const isDesktop = useMediaQuery("(min-width: 768px)");
   const [balances, setBalances] = useState({
-    eth: 100,
-    usdt: 100,
+    eth: formatUnits(BigInt(100000000000000000000), 18),
+    usdt: formatUnits(BigInt(0), 6),
   });
 
   const form = useForm({
@@ -163,8 +164,16 @@ export default function SwapDemo() {
               </div>
           </div>
           {/* Action button */}
-          <div className="flex flex-row gap-2 justify-center">
-            <Button className="hover:cursor-pointer w-full">
+          <div className="flex flex-row gap-2 justify-between">
+            <div className="flex flex-row gap-2">
+              <Button size="icon" variant="secondary" className="hover:cursor-pointer">
+                <ArrowUpDown className="w-4 h-4" />
+              </Button>
+              <Button size="icon" variant="secondary" className="hover:cursor-pointer">
+                <ArrowUpDown className="w-4 h-4" />
+              </Button>
+            </div>
+            <Button className="hover:cursor-pointer">
               <ArrowRightLeft className="w-4 h-4" />
               Trao đổi
             </Button>
@@ -179,11 +188,11 @@ function FieldInfo({ field }: { field: AnyFieldApi }) {
   return (
     <>
       {!field.state.meta.isTouched ? (
-        <em>Hãy nhập số ETH gửi</em>
+        <em>Hãy nhập số tài sản cần bán</em>
       ) : field.state.meta.isTouched && !field.state.meta.isValid ? (
         <em
           className={`${
-            field.state.meta.errors.join(",") === "Hãy nhập số ETH gửi"
+            field.state.meta.errors.join(",") === "Hãy nhập số tài sản cần bán"
               ? ""
               : "text-red-500"
           }`}
