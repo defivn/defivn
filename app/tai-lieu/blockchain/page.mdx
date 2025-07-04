@@ -1,12 +1,18 @@
-import PostNav from "@/components/post-nav"
-import HashDemo from "@/components/hash-demo"
+import PostNav from "@/components/post-nav";
+import HashDemo from "@/components/hash-demo";
 
 # Blockchain là gì?
 
 ## Khái niệm về Blockchain
+
 Blockchain (phiên dịch tiếng Việt **Công Nghệ Chuỗi Khối**) là cơ sở dữ liệu công cộng được cập nhật và chia sẻ trên nhiều máy tính trong mạng.
 
-**"Block" ("Khối")** đề cập đến dữ liệu và trạng thái được lưu trữ trong các nhóm liên tiếp được gọi là "khối". Nếu bạn gửi ETH cho người khác, dữ liệu giao dịch cần được thêm vào khối để thành công.
+**"Block" ("Khối")** là dữ liệu và trạng thái được lưu trữ trong các nhóm liên tiếp gọi là "khối". Ví dụ, khi bạn gửi ETH cho người khác, dữ liệu giao dịch cần được thêm vào một khối thì giao dịch đó mới được xác nhận thành công.
+
+khi chúng ta gửi nhiều giao dịch khác nhau, các giao dịch này sẽ được gom lại vào một khối. nói đơn giản, một khối chính là danh sách tất cả các giao dịch đã xảy ra trong một khoảng thời gian. trung bình, cứ khoảng 12 giây sẽ có một khối mới được tạo ra.
+
+<br />
+<BlockAnimation />
 
 **"Chain" ("Chuỗi")** đề cập đến thực tế là mỗi khối tham chiếu bằng mật mã đến khối mẹ của nó. Nói cách khác, các khối được xâu chuỗi lại với nhau. Dữ liệu trong một khối không thể thay đổi nếu không thay đổi tất cả các khối tiếp theo, điều này đòi hỏi sự đồng thuận của toàn bộ mạng.
 
@@ -17,6 +23,7 @@ Mọi máy tính trong mạng phải đồng ý với từng khối mới và to
 Dưới đây là 1 phần diễn giải về cơ chế vận hành của blockchain mà bạn có thể thử để hiểu rõ hơn. Phần này lấy cảm hứng từ [Anders Brownworth's Blockchain Demo](https://andersbrownworth.com/blockchain/) và được viết lại bởi [@zxstim](https://github.com/zxstim).
 
 ### Hash (Hàm băm)
+
 **Hash (hay còn gọi là hàm băm)** là một hàm toán học được sử dụng để tạo ra một giá trị duy nhất từ dữ liệu đầu vào. Trong blockchain, hash được sử dụng để tạo ra một giá trị duy nhất cho mỗi khối.
 
 **Hash** được sử dụng để xác thực tính toàn vẹn của dữ liệu trong blockchain. Khi một khối được tạo ra, nó sẽ được băm và một hash duy nhất sẽ được tạo ra. Hash này sẽ được thêm vào khối và sẽ được sử dụng để xác thực tính toàn vẹn của khối đó.
