@@ -5,8 +5,12 @@ import Image from "next/image";
 import { useForm } from "@tanstack/react-form";
 import type { AnyFieldApi } from "@tanstack/react-form";
 import { DEFIVN_WALLET_ADDRESS } from "@/lib/constants";
+import { ArrowRightLeft, ArrowUpDown } from 'lucide-react';
+import { useMediaQuery } from "@/hooks/use-media-query";
+import { Button } from "@/components/ui/button";
 
 export default function SwapDemo() {
+  const isDesktop = useMediaQuery("(min-width: 768px)");
   const [balances, setBalances] = useState({
     eth: 100,
     usdt: 100,
@@ -14,7 +18,7 @@ export default function SwapDemo() {
 
   const form = useForm({
     defaultValues: {
-      sendAmount: "",
+      sellAmount: "",
     },
     onSubmit: async ({ value }) => {
       console.log(value);
@@ -50,7 +54,7 @@ export default function SwapDemo() {
             </div>
             <div className="flex flex-row gap-2">
               <p>{balances.eth}</p>
-              <p>ETH</p>
+              <p className="text-muted-foreground">ETH</p>
             </div>
           </div>
           <div className="flex flex-row gap-2 justify-between items-center">
@@ -66,11 +70,107 @@ export default function SwapDemo() {
             </div>
             <div className="flex flex-row gap-2">
               <p>{balances.usdt}</p>
-              <p>USDT</p>
+              <p className="text-muted-foreground">USDT</p>
             </div>
           </div>
         </div>
       </div>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          form.handleSubmit();
+        }}
+      >
+        <div className="flex flex-col gap-4 border border-muted-foreground/10 rounded-md p-4">
+          <div className="flex flex-row gap-2 items-center">
+            <ArrowRightLeft className="w-4 h-4" />
+            <h2 className="text-lg text-muted-foreground">Trao đổi tài sản (Swap)</h2>
+          </div>
+          {/* Sell */}
+          <div className="flex flex-col gap-2">
+            <h2>Bạn bán</h2>
+            <form.Field
+              name="sellAmount"
+              validators={{
+                onChange: ({ value }) =>
+                  !value
+                    ? "Hãy nhập số tài sản cần bán"
+                    : Number(value) < 0
+                    ? "Số tài sản cần bán phải lớn hơn 0"
+                    : Number(value) > Number(balances.eth)
+                    ? "Số tài sản cần bán phải nhỏ hơn số dư tài khoản"
+                    : undefined,
+              }}
+            >
+              {(field) => (
+                <>
+                  <div className="flex flex-row gap-2 justify-between">
+                    {isDesktop ? (
+                      <input
+                        id={field.name}
+                        name={field.name}
+                        value={field.state.value || ""}
+                        onChange={(e) => field.handleChange(e.target.value)}
+                        type="number"
+                        placeholder="0"
+                        className="bg-transparent text-4xl outline-none w-full [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                      />
+                    ) : (
+                      <input
+                        id={field.name}
+                        name={field.name}
+                        value={field.state.value || ""}
+                        onChange={(e) => field.handleChange(e.target.value)}
+                        type="number"
+                        inputMode="decimal"
+                        pattern="[0-9]*"
+                        placeholder="0"
+                        className="bg-transparent text-4xl outline-none w-full [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                      />
+                    )}
+                    <p className="text-lg text-muted-foreground self-end">
+                      ETH
+                    </p>
+                  </div>
+                  <FieldInfo field={field} />
+                </>
+              )}
+            </form.Field>
+          </div>
+          {/* Switch button */}
+          <div className="flex flex-row gap-2 justify-center">
+            <Button size="icon" variant="secondary" className="hover:cursor-pointer">
+              <ArrowUpDown className="w-4 h-4" />
+            </Button>
+          </div>
+          {/* Buy */}
+          <div className="flex flex-col gap-2">
+            <h2>Bạn nhận</h2>
+              <div className="flex flex-row gap-2 justify-between">
+                <input
+                  id="buyAmount"
+                  name="buyAmount"
+                  value="0"
+                  type="number"
+                  placeholder="0"
+                  className="bg-transparent text-4xl outline-none w-full [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                  readOnly
+                />
+                <p className="text-lg text-muted-foreground self-end">
+                  USDT
+                </p>
+              </div>
+          </div>
+          {/* Action button */}
+          <div className="flex flex-row gap-2 justify-center">
+            <Button className="hover:cursor-pointer w-full">
+              <ArrowRightLeft className="w-4 h-4" />
+              Trao đổi
+            </Button>
+          </div>
+        </div>
+      </form>
     </div>
   );
 }
