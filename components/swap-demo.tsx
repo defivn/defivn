@@ -1,14 +1,15 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { useForm } from "@tanstack/react-form";
 import type { AnyFieldApi } from "@tanstack/react-form";
 import { DEFIVN_WALLET_ADDRESS } from "@/lib/constants";
-import { ArrowRightLeft, ArrowUpDown } from 'lucide-react';
+import { ArrowRightLeft, ArrowUpDown, CircleSlash } from "lucide-react";
 import { useMediaQuery } from "@/hooks/use-media-query";
 import { Button } from "@/components/ui/button";
-import { formatUnits } from "viem";
+import { formatUnits, parseUnits } from "viem";
+import useDebounce from "@/hooks/use-debounce";
 
 export default function SwapDemo() {
   const isDesktop = useMediaQuery("(min-width: 768px)");
@@ -16,6 +17,9 @@ export default function SwapDemo() {
     eth: formatUnits(BigInt(100000000000000000000), 18),
     usdt: formatUnits(BigInt(0), 6),
   });
+  const [buyAmount, setBuyAmount] = useState("");
+  
+  const EXCHANGE_RATE = 2500;
 
   const form = useForm({
     defaultValues: {
@@ -25,6 +29,14 @@ export default function SwapDemo() {
       console.log(value);
     },
   });
+
+  const debouncedSellAmount = useDebounce(form.state.values.sellAmount, 500);
+
+  useEffect(() => {
+    const sellAmount = parseUnits(debouncedSellAmount, 18);
+    const buyAmount = sellAmount * BigInt(EXCHANGE_RATE);
+    setBuyAmount(formatUnits(buyAmount, 6));
+  }, [debouncedSellAmount]);
 
   return (
     <div className="flex flex-col gap-4 mt-4">
@@ -86,7 +98,9 @@ export default function SwapDemo() {
         <div className="flex flex-col gap-4 border border-muted-foreground/10 rounded-md p-4">
           <div className="flex flex-row gap-2 items-center">
             <ArrowRightLeft className="w-4 h-4" />
-            <h2 className="text-lg text-muted-foreground">Trao đổi tài sản (Swap)</h2>
+            <h2 className="text-lg text-muted-foreground">
+              Trao đổi tài sản (Swap)
+            </h2>
           </div>
           {/* Sell */}
           <div className="flex flex-col gap-2">
@@ -97,9 +111,9 @@ export default function SwapDemo() {
                 onChange: ({ value }) =>
                   !value
                     ? "Hãy nhập số tài sản cần bán"
-                    : Number(value) < 0
+                    : BigInt(value) < BigInt(0)
                     ? "Số tài sản cần bán phải lớn hơn 0"
-                    : Number(value) > Number(balances.eth)
+                    : parseUnits(value, 18) > parseUnits(balances.eth, 18)
                     ? "Số tài sản cần bán phải nhỏ hơn số dư tài khoản"
                     : undefined,
               }}
@@ -141,43 +155,65 @@ export default function SwapDemo() {
           </div>
           {/* Switch button */}
           <div className="flex flex-row gap-2 justify-center">
-            <Button size="icon" variant="secondary" className="hover:cursor-pointer">
+            <Button
+              size="icon"
+              variant="secondary"
+              className="hover:cursor-pointer"
+            >
               <ArrowUpDown className="w-4 h-4" />
             </Button>
           </div>
           {/* Buy */}
           <div className="flex flex-col gap-2">
             <h2>Bạn nhận</h2>
-              <div className="flex flex-row gap-2 justify-between">
-                <input
-                  id="buyAmount"
-                  name="buyAmount"
-                  value="0"
-                  type="number"
-                  placeholder="0"
-                  className="bg-transparent text-4xl outline-none w-full [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-                  readOnly
-                />
-                <p className="text-lg text-muted-foreground self-end">
-                  USDT
-                </p>
-              </div>
+            <div className="flex flex-row gap-2 justify-between">
+              <input
+                id="buyAmount"
+                name="buyAmount"
+                value={buyAmount}
+                type="text"
+                placeholder="0"
+                className="bg-transparent text-4xl outline-none w-full [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                readOnly
+              />
+              <p className="text-lg text-muted-foreground self-end">USDT</p>
+            </div>
+          </div>
+          {/* Exchange rate */}
+          <div className="flex flex-row gap-2 justify-end items-center">
+            <CircleSlash className="w-4 h-4" />
+            <p>1 ETH = {EXCHANGE_RATE} USDT</p>
           </div>
           {/* Action button */}
-          <div className="flex flex-row gap-2 justify-between">
-            <div className="flex flex-row gap-2">
-              <Button size="icon" variant="secondary" className="hover:cursor-pointer">
-                <ArrowUpDown className="w-4 h-4" />
-              </Button>
-              <Button size="icon" variant="secondary" className="hover:cursor-pointer">
-                <ArrowUpDown className="w-4 h-4" />
-              </Button>
-            </div>
-            <Button className="hover:cursor-pointer">
-              <ArrowRightLeft className="w-4 h-4" />
-              Trao đổi
-            </Button>
-          </div>
+
+          <form.Subscribe
+            selector={(state) => [state.canSubmit, state.isSubmitting]}
+          >
+            {([canSubmit, isSubmitting]) => (
+              <div className="flex flex-row gap-2 justify-between">
+                <div className="flex flex-row gap-2">
+                  <Button
+                    size="icon"
+                    variant="secondary"
+                    className="hover:cursor-pointer"
+                  >
+                    <ArrowUpDown className="w-4 h-4" />
+                  </Button>
+                  <Button
+                    size="icon"
+                    variant="secondary"
+                    className="hover:cursor-pointer"
+                  >
+                    <ArrowUpDown className="w-4 h-4" />
+                  </Button>
+                </div>
+                <Button className="hover:cursor-pointer">
+                  <ArrowRightLeft className="w-4 h-4" />
+                  Trao đổi
+                </Button>
+              </div>
+            )}
+          </form.Subscribe>
         </div>
       </form>
     </div>
