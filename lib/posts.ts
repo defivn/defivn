@@ -136,5 +136,16 @@ export const posts = [
         url: "/tai-lieu/drift"
       }
     ]
+  },
+  {
+    id: 4,
+    section: "Hướng dẫn",
+    posts: [
+      {
+        id: 1,
+        title: "Bắt đầu với tài sản số cho học sinh, sinh viên và người mới ra trường",
+        url: "/tai-lieu/huong-dan-bat-dau-voi-tai-san-so-cho-hoc-sinh-sinh-vien-va-nguoi-moi-ra-truong"
+      }
+    ]
   }
 ]
