@@ -147,5 +147,16 @@ export const posts = [
         url: "/tai-lieu/huong-dan-bat-dau-voi-tai-san-so-cho-hoc-sinh-sinh-vien-va-nguoi-moi-ra-truong"
       }
     ]
+  },
+  {
+    id: 5,
+    section: "Văn bản",
+    posts: [
+      {
+        id: 1,
+        title: "Nội dung dự thảo liên quan đến Tài Sản Số",
+        url: "/tai-lieu/noi-dung-du-thao-lien-quan-den-tai-san-so"
+      }
+    ]
   }
 ]
