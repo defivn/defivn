@@ -1,36 +1,24 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Giới thiệu
 
-## Getting Started
+Hãy cùng nhau tìm hiểu về dự án **DeFi.vn trong 5 phút**.
 
-First, run the development server:
+## DeFi.vn là gì?
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### Bối cảnh
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Hiện tại, người Việt Nam khi tiếp cận đến thông tin về tài chính phi tập trung đang đối mặt với thách thức từ việc nguồn dữ liệu không nhất quán, thiếu tư liệu dịch trực tiếp và chưa có kiểm tra tính đúng sai của thông tin. Điều này càng trở nên phức tạp khi có những cá nhân và tổ chức với ý đồ không lành mạnh, đóng góp vào sự mơ hồ trong thông tin. Hơn nữa, sự hiểu biết còn hạn chế về bản chất và giá trị của tài chính phi tập trung tại Việt Nam khiến nhiều người chỉ tập trung vào việc đầu cơ tài sản số mà không thực sự hiểu rõ, gây thiệt hại về tài sản, ảnh hưởng tiêu cực đến cuộc sống.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Giải pháp
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Đối mặt với những thách thức này, DeFi.vn mong muốn được đóng vai trò quan trọng trong việc cung cấp thông tin đáng tin cậy và minh bạch về tài chính phi tập trung. Với nguồn thông tin chính xác, dễ hiểu và có trích nguồn, DeFi.vn giúp cải thiện kiến thức của người dùng hoặc nhà đầu tư về thị trường tài sản số, giảm thiểu rủi ro từ thông tin sai lệch. Ngoài ra, DeFi.vn còn tạo điều kiện cho cộng đồng tài chính phi tập trung ở Việt Nam phát triển một cách lành mạnh và bền vững, thông qua việc nâng cao kiến thức nền tảng và nhận thức về các rủi ro tiềm ẩn, mang lại một sân chơi công bằng, bình đẳng và văn minh.
 
-## Learn More
+## Về tài liệu
 
-To learn more about Next.js, take a look at the following resources:
+Tài liệu của DeFi.vn là nguồn cung cấp định nghĩa, khái niệm và kiến thức nền tảng sâu rộng về tài chính phi tập trung. Nó giúp người dùng hiểu rõ về công nghệ blockchain và ứng dụng của nó trong tài chính phi tập trung (hay còn gọi là DeFi). Tất cả nội dung trên trang web DeFi.vn đều được thông qua đội ngũ biên tập viên từ cộng đồng để kiểm tra nguồn trích dẫn, đảm bảo tính chính xác của các bài viết. Với ngôn ngữ dễ hiểu và thông tin luôn được cập nhật, tài liệu này sẽ trở thành nguồn thông tin đáng giá cho bất kỳ ai muốn tìm hiểu sâu về DeFi.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Về bài viết
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Phần bài viết của DeFi.vn là tập hợp các ý kiến, phân tích và quan điểm từ cộng đồng và các chuyên gia hàng đầu trong lĩnh vực tài chính phi tập trung. Nơi đây cung cấp cái nhìn sâu sắc và đa dạng về các xu hướng, chiến lược và vấn đề cốt lõi trong thế giới DeFi. Bằng cách này, DeFi.vn trở thành diễn đàn quan trọng, nơi mọi người có thể trao đổi kiến thức, chia sẻ kinh nghiệm và học hỏi lẫn nhau.
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Hướng dẫn cách đóng góp
+Để đóng góp cho nội dung cho DeFi.vn thông qua việc mở pull request trên GitHub, bạn có thể tham khảo hướng dẫn ở trang [**Đóng góp nội dung**](/dong-gop-noi-dung)
