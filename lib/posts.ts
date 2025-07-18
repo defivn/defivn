@@ -81,11 +81,6 @@ export const posts = [
         url: "/tai-lieu/lido"
       },
       {
-        id: 2,
-        title: "Sanctum",
-        url: "/tai-lieu/sanctum"
-      },
-      {
         id: 3,
         title: "Bifrost",
         url: "/tai-lieu/bifrost"
@@ -101,11 +96,6 @@ export const posts = [
         url: "/tai-lieu/kyberswap"
       },
       {
-        id: 6,
-        title: "Jupiter",
-        url: "/tai-lieu/jupiter"
-      },
-      {
         id: 7,
         title: "Hydration",
         url: "/tai-lieu/hydration"
@@ -116,11 +106,6 @@ export const posts = [
         url: "/tai-lieu/aave"
       },
       {
-        id: 9,
-        title: "Kamino",
-        url: "/tai-lieu/kamino"
-      },
-      {
         id: 10,
         title: "Pendle",
         url: "/tai-lieu/pendle"
@@ -129,11 +114,6 @@ export const posts = [
         id: 11,
         title: "GMX",
         url: "/tai-lieu/gmx"
-      },
-      {
-        id: 12,
-        title: "Drift",
-        url: "/tai-lieu/drift"
       }
     ]
   },
