@@ -4,7 +4,12 @@ import { posts } from "@/lib/posts";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import {
+  Sheet,
+  SheetContent,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 import { Button } from "./ui/button";
 import { Menu } from "lucide-react";
 
@@ -50,6 +55,7 @@ export function SidebarSheet() {
         </Button>
       </SheetTrigger>
       <SheetContent side="left" className="p-4 w-[280px] sm:w-[300px]">
+        <SheetTitle className="sr-only">Danh sách tài liệu</SheetTitle>
         <SidebarNav />
       </SheetContent>
     </Sheet>

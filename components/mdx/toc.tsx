@@ -82,7 +82,7 @@ export default function TOC() {
           <DrawerHeader>
             <DrawerTitle>Mục lục</DrawerTitle>
           </DrawerHeader>
-          <div className="p-4 overflow-auto max-h-[70vh]">
+          <div className="p-4 overflow-auto max-h-[70vh pb-20">
             <nav className="space-y-2">
               {headings.map((heading, index) => (
                 <li
