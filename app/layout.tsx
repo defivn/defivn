@@ -6,7 +6,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Header } from "@/components/header";
 import Footer from "@/components/footer";
-import { AIButton } from "@/components/ai-button";
+// import { AIButton } from "@/components/ai-button";
 import Providers from "@/providers";
 
 // const sourceSans3 = Source_Sans_3({
@@ -62,10 +62,10 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             <div className="min-h-screen flex flex-col justify-between p-2 md:p-8 mb-12">
-              <main className="max-w-2xl mx-auto w-full space-y-6">
+              <main className="max-w-7xl mx-auto w-full space-y-6">
                 <Header />
                 {children}
-                <AIButton />
+                {/* <AIButton /> */}
                 <Footer />
               </main>
             </div>
