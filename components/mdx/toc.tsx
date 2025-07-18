@@ -1,9 +1,19 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { cn } from "@/lib/utils";
-import Link from "next/link";
+import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
+import { cn } from "@/lib/utils";
+import { useIsMobile } from "@/hooks/use-mobile";
+import {
+  Drawer,
+  DrawerContent,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer";
+import { Button } from "@/components/ui/button";
+import { ListFilter } from "lucide-react";
 
 interface TocItem {
   id: string;
@@ -15,104 +25,110 @@ export default function TOC() {
   const [headings, setHeadings] = useState<TocItem[]>([]);
   const [activeId, setActiveId] = useState<string>("");
   const pathname = usePathname();
+  const isMobile = useIsMobile();
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   useEffect(() => {
-    // Reset headings when pathname changes
     setHeadings([]);
     setActiveId("");
+    setIsDrawerOpen(false);
 
-    // Function to extract headings
-    const extractHeadings = () => {
-      const mainContent = document.querySelector(".content-main");
-      if (!mainContent) return;
-
-      const elements = Array.from(mainContent.querySelectorAll("h2, h3")).map(
-        (element) => {
-          // Generate ID if none exists
-          if (!element.id) {
-            element.id = `heading-${Math.random().toString(36).substr(2, 9)}`;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveId(entry.target.id);
           }
-          return {
-            id: element.id,
-            text: element.textContent || "",
-            level: Number(element.tagName.charAt(1)),
-          };
-        }
-      );
-      setHeadings(elements);
-    };
+        });
+      },
+      { rootMargin: "0px 0px -80% 0px" }
+    );
 
-    // Initial extraction
-    extractHeadings();
-
-    // Set up a mutation observer to detect when the content changes
-    const observer = new MutationObserver(() => {
-      extractHeadings();
+    const headingElements = Array.from(
+      document.querySelectorAll("h2[id], h3[id]")
+    );
+    const newHeadings: TocItem[] = headingElements.map((element) => {
+      observer.observe(element);
+      return {
+        id: element.id,
+        text: element.textContent || "",
+        level: element.tagName === "H2" ? 2 : 3,
+      };
     });
-
-    const mainContent = document.querySelector(".content-main");
-    if (mainContent) {
-      observer.observe(mainContent, {
-        childList: true,
-        subtree: true,
-      });
-    }
-
-    // Small delay to ensure DOM is fully rendered
-    const timer = setTimeout(() => {
-      extractHeadings();
-    }, 300);
+    setHeadings(newHeadings);
 
     return () => {
-      observer.disconnect();
-      clearTimeout(timer);
+      headingElements.forEach((element) => observer.unobserve(element));
     };
-  }, [pathname]); // Re-run effect when pathname changes
-
-  // Scroll spy effect
-  useEffect(() => {
-    if (headings.length === 0) return;
-
-    const handleScroll = () => {
-      const scrollY = window.scrollY;
-      const offset = 100; // Offset from top of viewport
-
-      // Find the current active heading
-      let currentActiveId = "";
-
-      for (let i = headings.length - 1; i >= 0; i--) {
-        const heading = headings[i];
-        const element = document.getElementById(heading.id);
-
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          const elementTop = rect.top + scrollY;
-
-          if (scrollY >= elementTop - offset) {
-            currentActiveId = heading.id;
-            break;
-          }
-        }
-      }
-
-      setActiveId(currentActiveId);
-    };
-
-    // Initial check
-    handleScroll();
-
-    // Add scroll listener
-    window.addEventListener("scroll", handleScroll, { passive: true });
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [headings]);
+  }, [pathname]);
 
   if (headings.length === 0) {
     return null;
   }
 
+  const activeHeadingText =
+    headings.find((h) => h.id === activeId)?.text || "Mục lục";
+
+  if (isMobile) {
+    return (
+      <Drawer open={isDrawerOpen} onOpenChange={setIsDrawerOpen}>
+        <DrawerTrigger asChild>
+          <Button variant="outline" className="w-full bg-transparent">
+            <ListFilter className="mr-2 h-4 w-4" />
+            <span>{activeHeadingText}</span>
+          </Button>
+        </DrawerTrigger>
+        <DrawerContent>
+          <DrawerHeader>
+            <DrawerTitle>Mục lục</DrawerTitle>
+          </DrawerHeader>
+          <div className="p-4 overflow-auto max-h-[70vh]">
+            <nav className="space-y-2">
+              {headings.map((heading, index) => (
+                <li
+                  key={`${heading.id}-${index}`}
+                  className={cn(
+                    "list-none text-sm",
+                    heading.level === 2 ? "ml-0" : "ml-4"
+                  )}
+                >
+                  <Link
+                    href={`#${heading.id}`}
+                    className={cn(
+                      "block py-1 transition-all duration-300",
+                      activeId === heading.id
+                        ? "text-foreground font-bold border-l-2 border-primary pl-2"
+                        : "text-muted-foreground hover:text-foreground hover:underline pl-0 border-l-2 border-transparent"
+                    )}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setIsDrawerOpen(false);
+
+                      setTimeout(() => {
+                        const el = document.getElementById(heading.id);
+                        if (el) {
+                          window.scrollTo({
+                            top:
+                              el.getBoundingClientRect().top + window.scrollY,
+                            behavior: "smooth",
+                          });
+                          history.pushState(null, "", `#${heading.id}`);
+                        }
+                      }, 700);
+                    }}
+                  >
+                    {heading.text}
+                  </Link>
+                </li>
+              ))}
+            </nav>
+          </div>
+        </DrawerContent>
+      </Drawer>
+    );
+  }
+
+  // Desktop view (unchanged)
   return (
     <div className="border rounded-lg p-4 sticky top-20 max-h-[calc(100vh-120px)] overflow-y-auto">
       <h3 className="text-lg font-semibold mb-3">Mục lục</h3>
