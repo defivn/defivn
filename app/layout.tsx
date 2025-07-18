@@ -62,7 +62,7 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             <div className="min-h-screen flex flex-col justify-between p-2 md:p-8 mb-12">
-              <main className="max-w-2xl mx-auto w-full space-y-6">
+              <main className="max-w-5xl mx-auto w-full space-y-6">
                 <Header />
                 {children}
                 <AIButton />
