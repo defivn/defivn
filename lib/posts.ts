@@ -10,28 +10,28 @@ export const posts = [
       },
       {
         id: 2,
+        title: "Tài sản số",
+        url: "/tai-lieu/tai-san-so"
+      },
+      {
+        id: 3,
         title: "Tài chính phi tập trung",
         url: "/tai-lieu/tai-chinh-phi-tap-trung"
       },
       {
-        id: 3,
+        id: 4,
         title: "Ứng dụng phi tập trung",
         url: "/tai-lieu/ung-dung-phi-tap-trung"
       },
       {
-        id: 4,
+        id: 5,
         title: "Hợp đồng thông minh",
         url: "/tai-lieu/hop-dong-thong-minh"
       },
       {
-        id: 5,
+        id: 6,
         title: "Tổ chức tự trị phi tập trung",
         url: "/tai-lieu/to-chuc-tu-tri-phi-tap-trung"
-      },
-      {
-        id: 6,
-        title: "Canh tác lãi suất",
-        url: "/tai-lieu/canh-tac-lai-suat"
       },
       {
         id: 7,
@@ -40,6 +40,11 @@ export const posts = [
       },
       {
         id: 8,
+        title: "Trao đổi tài sản",
+        url: "/tai-lieu/trao-doi-tai-san"
+      },
+      {
+        id: 9,
         title: "Từ điển",
         url: "/tai-lieu/tu-dien"
       }
@@ -76,11 +81,6 @@ export const posts = [
         url: "/tai-lieu/lido"
       },
       {
-        id: 2,
-        title: "Sanctum",
-        url: "/tai-lieu/sanctum"
-      },
-      {
         id: 3,
         title: "Bifrost",
         url: "/tai-lieu/bifrost"
@@ -96,11 +96,6 @@ export const posts = [
         url: "/tai-lieu/kyberswap"
       },
       {
-        id: 6,
-        title: "Jupiter",
-        url: "/tai-lieu/jupiter"
-      },
-      {
         id: 7,
         title: "Hydration",
         url: "/tai-lieu/hydration"
@@ -111,11 +106,6 @@ export const posts = [
         url: "/tai-lieu/aave"
       },
       {
-        id: 9,
-        title: "Kamino",
-        url: "/tai-lieu/kamino"
-      },
-      {
         id: 10,
         title: "Pendle",
         url: "/tai-lieu/pendle"
@@ -124,11 +114,28 @@ export const posts = [
         id: 11,
         title: "GMX",
         url: "/tai-lieu/gmx"
-      },
+      }
+    ]
+  },
+  {
+    id: 4,
+    section: "Hướng dẫn",
+    posts: [
       {
-        id: 12,
-        title: "Drift",
-        url: "/tai-lieu/drift"
+        id: 1,
+        title: "Bắt đầu với tài sản số cho học sinh, sinh viên và người mới ra trường",
+        url: "/tai-lieu/huong-dan-bat-dau-voi-tai-san-so-cho-hoc-sinh-sinh-vien-va-nguoi-moi-ra-truong"
+      }
+    ]
+  },
+  {
+    id: 5,
+    section: "Văn bản",
+    posts: [
+      {
+        id: 1,
+        title: "Nội dung dự thảo liên quan đến Tài Sản Số",
+        url: "/tai-lieu/noi-dung-du-thao-lien-quan-den-tai-san-so"
       }
     ]
   }

@@ -1,12 +1,19 @@
+"use client"
+
 import { posts } from "@/lib/posts"
 import Link from "next/link"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { usePathname } from "next/navigation"
 
-export default function PostNav({ currentSectionId, currentPostId }: { currentSectionId: number, currentPostId: number }) {
-  // based on the current section id, find the list of posts
-  const currentSection = posts.find((post) => post.id === currentSectionId)
-  
+export default function PostNav() {
+
+  const pathname = usePathname()
+
+  const currentSection = posts.find((post) => post.posts.find((p) => p.url === pathname))
+  const currentSectionId = currentSection?.id ?? 0
+  const currentPostId = currentSection?.posts.find((p) => p.url === pathname)?.id ?? 0
+
   // based on the current post id, find the previous and next post
   const previousPost = currentPostId === 1 ? 
     (currentSectionId === 1 ? undefined : posts[currentSectionId - 2]?.posts[posts[currentSectionId - 2]?.posts.length - 1]) : 

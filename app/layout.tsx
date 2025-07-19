@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-// import { Source_Sans_3 } from "next/font/google";
-
-import { Inter } from "next/font/google";
+import Script from "next/script";
+// Vietnamese font
+import { Be_Vietnam_Pro } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Header } from "@/components/header";
@@ -9,12 +9,10 @@ import Footer from "@/components/footer";
 // import { AIButton } from "@/components/ai-button";
 import Providers from "@/providers";
 
-// const sourceSans3 = Source_Sans_3({
-//   subsets: ["latin"],
-// });
-
-const fontVietnamese = Inter({
+// initialize Vietnamese font
+const fontVietnamese = Be_Vietnam_Pro({
   subsets: ["latin"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
 });
 
 export const metadata: Metadata = {
@@ -71,6 +69,11 @@ export default function RootLayout({
             </div>
           </ThemeProvider>
         </Providers>
+        <Script
+          defer
+          src="https://analytics.zxstim.com/script.js"
+          data-website-id="52d241bb-9bb1-4881-bcea-589f7eddbf79"
+        />
       </body>
     </html>
   );
