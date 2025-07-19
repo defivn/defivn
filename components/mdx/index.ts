@@ -14,6 +14,7 @@ import TD from "./td";
 import TH from "./th";
 import TR from "./tr";
 import UL from "./ul";
+import TOC from "./toc";
 
 export const mdxComponents = {
     h1: H1,
@@ -32,4 +33,5 @@ export const mdxComponents = {
     td: TD,
     th: TH,
     code: Code,
+    TOC: TOC,
 }

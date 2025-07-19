@@ -7,8 +7,8 @@ import {
   generateTransactionFee,
   generateTransactionId,
 } from "@/lib/blockchain/transactions";
-import CircularCountdown from "@/components/blockchain/circular-countdown";
-import { Card } from "@/components/ui/card";
+import CircularCountdown from "./circular-countdown";
+import { Card } from "../ui/card";
 import { CircleCheck } from "lucide-react";
 
 // Custom hook for intersection observer
@@ -30,7 +30,6 @@ const useIntersectionObserver = (threshold = 0.1) => {
 
     return () => {
       if (ref.current) {
-        // eslint-disable-next-line react-hooks/exhaustive-deps
         observer.unobserve(ref.current);
       }
     };
@@ -199,9 +198,9 @@ const BlockContainer: React.FC<BlockContainerProps> = ({
     >
       {/* Mobile layout - Block # on its own line */}
       <div className="flex flex-col items-center sm:hidden mb-2">
-        <h3 className="text-sm font-semibold text-gray-100 text-center">
+        <p className="text-sm font-semibold text-gray-100 text-center">
           Khối #{blockNumber}
-        </h3>
+        </p>
         <div className="flex items-center justify-between gap-2 sm:gap-0">
           <div className="flex items-center justify-center flex-1">
             {getBlockIcon()}
@@ -221,9 +220,9 @@ const BlockContainer: React.FC<BlockContainerProps> = ({
       {/* Desktop layout - everything in one line */}
       <div className="hidden sm:flex items-center justify-between mb-4">
         <div className="flex items-center space-x-3">
-          <h3 className="text-lg font-semibold text-gray-100">
+          <p className="text-lg font-semibold text-gray-100">
             Khối #{blockNumber}
-          </h3>
+          </p>
           {getBlockIcon()}
         </div>
         <span
@@ -378,16 +377,16 @@ const BlockAnimation: React.FC = () => {
       <div className="p-3 sm:p-6 pb-1">
         {/* Header */}
         <div className="text-center mb-4 sm:mb-6">
-          <h2 className="text-xl sm:text-2xl font-bold mb-2">Xây dựng khối</h2>
+          <p className="text-xl sm:text-2xl font-bold mb-2">Xây dựng khối</p>
         </div>
 
         {/* Two-column layout for blocks - always 2 columns, but smaller on mobile */}
         <div className="grid grid-cols-2 gap-3 sm:gap-8 mb-4 sm:mb-6">
           {/* Previous Block (if exists) */}
           <div className="space-y-2 sm:space-y-4">
-            <h3 className="text-sm sm:text-lg font-semibold text-center">
+            <p className="text-sm sm:text-lg font-semibold text-center">
               Khối trước
-            </h3>
+            </p>
             <div className="flex justify-center">
               {previousBlock.length > 0 ? (
                 <BlockContainer
@@ -409,9 +408,9 @@ const BlockAnimation: React.FC = () => {
 
           {/* Current Block */}
           <div className="space-y-2 sm:space-y-4">
-            <h3 className="text-sm sm:text-lg font-semibold text-center">
+            <p className="text-sm sm:text-lg font-semibold text-center">
               Khối hiện tại
-            </h3>
+            </p>
             <div className="flex justify-center">
               <BlockContainer
                 transactions={currentBlock}
