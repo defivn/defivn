@@ -29,8 +29,8 @@ export default function PostNav() {
           <div className="flex flex-row justify-between items-center gap-2 w-full">
             <ChevronLeft className="w-4 h-4" />
             <div className="flex flex-col gap-2 text-right">
-              <p className="text-[12px]">Trước</p>
-              <p className="text-md font-bold">{previousPost ? previousPost.title : "Trang chủ"}</p>
+              <p className="text-sm">Trước</p>
+              <p className="text-md font-bold text-pretty">{previousPost ? previousPost.title : "Trang chủ"}</p>
             </div>
           </div>
         </Link>
@@ -40,7 +40,7 @@ export default function PostNav() {
           <div className="flex flex-row justify-between items-center gap-2 w-full text-left">
             <div className="flex flex-col gap-2">
               <p className="text-sm">Tiếp</p>
-              <p className="text-md font-bold">{nextPost ? nextPost.title : "Trang chủ"}</p>
+              <p className="text-md font-bold text-pretty">{nextPost ? nextPost.title : "Trang chủ"}</p>
             </div>
             <ChevronRight className="w-4 h-4" />
           </div>
