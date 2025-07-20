@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import {
   Breadcrumb,
@@ -7,11 +7,10 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb"
-import { Home } from "lucide-react"
+} from "@/components/ui/breadcrumb";
+import { Home } from "lucide-react";
 
 export default function CustomBreadcrumb() {
-
   // function shortenTitle(title: string) {
   //   // if the title is longer than 20 characters, shorten it
   //   if (title.length > 20) {
@@ -21,7 +20,7 @@ export default function CustomBreadcrumb() {
   // }
 
   return (
-    <Breadcrumb className="mb-8 mt-4">
+    <Breadcrumb className="mb-8 mt-4 hidden lg:block">
       <BreadcrumbList>
         <BreadcrumbItem>
           <BreadcrumbLink className="flex flex-row items-center gap-2" href="/">
