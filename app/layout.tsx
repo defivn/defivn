@@ -6,8 +6,6 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Header } from "@/components/header";
 import Footer from "@/components/footer";
-// import { AIButton } from "@/components/ai-button";
-import Providers from "@/providers";
 
 // initialize Vietnamese font
 const fontVietnamese = Be_Vietnam_Pro({
@@ -51,29 +49,26 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="vi" suppressHydrationWarning>
+      <Script
+        defer
+        src="https://analytics.zxstim.com/script.js"
+        data-website-id="52d241bb-9bb1-4881-bcea-589f7eddbf79"
+      />
       <body className={`${fontVietnamese.className} antialiased`}>
-        <Providers>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <div className="min-h-screen flex flex-col justify-between p-2 md:p-8 mb-12">
-              <main className="max-w-7xl mx-auto w-full space-y-6">
-                <Header />
-                {children}
-                {/* <AIButton /> */}
-                <Footer />
-              </main>
-            </div>
-          </ThemeProvider>
-        </Providers>
-        <Script
-          defer
-          src="https://analytics.zxstim.com/script.js"
-          data-website-id="52d241bb-9bb1-4881-bcea-589f7eddbf79"
-        />
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <div className="min-h-screen flex flex-col justify-between p-2 md:p-8 mb-12">
+            <main className="mx-auto w-full space-y-6">
+              <Header />
+              {children}
+              <Footer />
+            </main>
+          </div>
+        </ThemeProvider>
       </body>
     </html>
   );

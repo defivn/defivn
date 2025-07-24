@@ -45,6 +45,11 @@ export const posts = [
       },
       {
         id: 9,
+        title: "Tín dụng",
+        url: "/tai-lieu/tin-dung"
+      },
+      {
+        id: 10,
         title: "Từ điển",
         url: "/tai-lieu/tu-dien"
       }
