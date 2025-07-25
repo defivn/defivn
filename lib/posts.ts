@@ -130,6 +130,11 @@ export const posts = [
         id: 1,
         title: "Bắt đầu với tài sản số cho học sinh, sinh viên và người mới ra trường",
         url: "/tai-lieu/huong-dan-bat-dau-voi-tai-san-so-cho-hoc-sinh-sinh-vien-va-nguoi-moi-ra-truong"
+      },
+      {
+        id: 2,
+        title: "DeFi cho sinh viên trong 5 phút",
+        url: "/tai-lieu/defi-cho-sinh-vien-trong-5-phut"
       }
     ]
   },
@@ -141,7 +146,7 @@ export const posts = [
         id: 1,
         title: "Nội dung dự thảo liên quan đến Tài Sản Số",
         url: "/tai-lieu/noi-dung-du-thao-lien-quan-den-tai-san-so"
-      }
+      },
     ]
   }
 ]
