@@ -5,6 +5,7 @@ import Link from "next/link"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { usePathname } from "next/navigation"
+import { shortenTitle } from "@/lib/utils"
 
 export default function PostNav() {
 
@@ -30,7 +31,7 @@ export default function PostNav() {
             <ChevronLeft className="w-4 h-4" />
             <div className="flex flex-col gap-2 text-right">
               <p className="text-sm">Trước</p>
-              <p className="text-md font-bold text-pretty">{previousPost ? previousPost.title : "Trang chủ"}</p>
+              <p className="text-md font-bold text-pretty">{previousPost ? shortenTitle(previousPost.title) : "Trang chủ"}</p>
             </div>
           </div>
         </Link>
@@ -40,7 +41,7 @@ export default function PostNav() {
           <div className="flex flex-row justify-between items-center gap-2 w-full text-left">
             <div className="flex flex-col gap-2">
               <p className="text-sm">Tiếp</p>
-              <p className="text-md font-bold text-pretty">{nextPost ? nextPost.title : "Trang chủ"}</p>
+              <p className="text-md font-bold text-pretty">{nextPost ? shortenTitle(nextPost.title) : "Trang chủ"}</p>
             </div>
             <ChevronRight className="w-4 h-4" />
           </div>

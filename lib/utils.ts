@@ -11,3 +11,7 @@ export function slugify(text: string) {
   // replace all spaces with hyphens
   .replace(/ /g, '-')
 }
+
+export function shortenTitle(title: string) {
+  return title.length > 35 ? title.slice(0, 35) + "..." : title;
+}
