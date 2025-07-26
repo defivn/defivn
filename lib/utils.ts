@@ -12,6 +12,6 @@ export function slugify(text: string) {
   .replace(/ /g, '-')
 }
 
-export function shortenTitle(title: string) {
-  return title.length > 35 ? title.slice(0, 35) + "..." : title;
+export function shortenTitle(title: string, maxLength: number = 35) {
+  return title.length > maxLength ? title.slice(0, maxLength) + "..." : title;
 }

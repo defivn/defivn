@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/drawer";
 import { Button } from "@/components/ui/button";
 import { ListFilter } from "lucide-react";
+import { shortenTitle } from "@/lib/utils";
 
 interface TocItem {
   id: string;
@@ -117,7 +118,7 @@ export default function TOC() {
                       }, 700);
                     }}
                   >
-                    {heading.text}
+                    {shortenTitle(heading.text, 35)}
                   </Link>
                 </li>
               ))}
@@ -150,7 +151,7 @@ export default function TOC() {
                   : "text-muted-foreground hover:text-foreground hover:underline pl-0 border-l-2 border-transparent"
               )}
             >
-              {heading.text}
+              {shortenTitle(heading.text, 35)}
             </Link>
           </li>
         ))}

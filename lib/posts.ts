@@ -148,5 +148,16 @@ export const posts = [
         url: "/tai-lieu/noi-dung-du-thao-lien-quan-den-tai-san-so"
       },
     ]
+  },
+  {
+    id: 6,
+    section: "Bình luận",
+    posts: [
+      {
+        id: 1,
+        title: "Lựa chọn nền tảng công nghệ blockchain cho dự án tài sản số",
+        url: "/tai-lieu/lua-chon-nen-tang-cong-nghe-blockchain-cho-du-an-tai-san-so"
+      }
+    ]
   }
 ]
