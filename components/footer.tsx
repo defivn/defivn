@@ -42,6 +42,17 @@ export default function Footer() {
               <Link target="_blank" href="https://www.facebook.com/defivn">
                 <Image
                   src="/facebook.svg"
+                  alt="facebook"
+                  width={24}
+                  height={24}
+                  className="dark:invert"
+                />
+              </Link>
+            </Button>
+            <Button asChild variant="link" size="icon">
+              <Link target="_blank" href="https://www.x.com/defivnx">
+                <Image
+                  src="/x.svg"
                   alt="x"
                   width={24}
                   height={24}

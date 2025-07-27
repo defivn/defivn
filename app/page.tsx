@@ -120,6 +120,26 @@ export default function Home() {
               </div>
             ))}
         </div>
+        <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0">
+          Ý kiến
+        </h2>
+        <div className="flex flex-col gap-2">
+          {posts
+            .find((post) => post.section === "Ý kiến")
+            ?.posts.map((post) => (
+              <div key={post.id} className="flex flex-row items-center gap-2">
+                <h3 className="text-sm font-semibold bg-muted p-2 rounded-full w-8 h-8 flex items-center justify-center">
+                  {post.id}
+                </h3>
+                <Link
+                  className="font-medium underline underline-offset-4 text-blue-500 dark:text-blue-400 w-fit"
+                  href={post.url}
+                >
+                  {post.title}
+                </Link>
+              </div>
+            ))}
+        </div>
       </div>
       <div className="space-y-6">
         <h1 className="mt-12 scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">

@@ -151,7 +151,7 @@ export const posts = [
   },
   {
     id: 6,
-    section: "Bình luận",
+    section: "Ý kiến",
     posts: [
       {
         id: 1,
