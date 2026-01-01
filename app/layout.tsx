@@ -1,7 +1,6 @@
 import { RootProvider } from 'fumadocs-ui/provider/next';
 import './global.css';
 import type { Metadata } from "next";
-import Script from "next/script";
 // Vietnamese font
 import { Be_Vietnam_Pro } from "next/font/google";
 
@@ -43,11 +42,6 @@ export const metadata: Metadata = {
 export default function Layout({ children }: LayoutProps<'/'>) {
   return (
     <html lang="vi" className={`${fontVietnamese.className} antialiased`} suppressHydrationWarning>
-      <Script
-        defer
-        src="https://analytics.zxstim.com/script.js"
-        data-website-id="52d241bb-9bb1-4881-bcea-589f7eddbf79"
-      />
       <body className="flex flex-col min-h-screen">
         <RootProvider>
           {children}
